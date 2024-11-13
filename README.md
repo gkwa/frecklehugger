@@ -1,11 +1,18 @@
--- README.md --
 # frecklehugger
 
-Git notes CLI tool for finding and organizing long-lost Git notes, especially useful for archaeology of abandoned feature branches.
+Git archaeology tool for excavating lost knowledge from abandoned feature branches.
 
 ## Motivation
 
-Many Git repositories contain deeply nested feature branches that never found their way back to main. These branches often contain valuable information in their commit messages and Git notes about why certain technical approaches were abandoned.
+When exploring new technical approaches, we often create experimental branches that never get merged. Despite being "dead ends", these branches frequently contain valuable insights in their Git notes:
+
+- Failed approaches that seemed promising ("tried Jaeger but hit sampling limitations")
+- Performance benchmarks ("GraphQL queries taking 2.5x longer than REST")
+- Architectural decision records ("K8s operator too complex for our team size")
+- Cost analyses ("Datadog pricing doesn't scale for our use case") 
+- Dependencies that didn't pan out ("gRPC streaming increases latency by 30%")
+
+This knowledge gets buried in Git notes across many abandoned feature branches. frecklehugger helps rediscover and organize these insights.
 
 ### Example Repository Structure
 
@@ -39,7 +46,7 @@ gitGraph
     branch feature/metrics-datadog
     checkout feature/metrics-datadog
     commit id: "dd-setup"
-    commit id: "dd-pricing-concerns"
+    commit id: "dd-pricing-concerns" type: HIGHLIGHT
     checkout feature/astound
     commit id: "add-unit-tests"
     commit id: "improve-coverage-wip"
@@ -47,22 +54,39 @@ gitGraph
     checkout experimental/graphql
     commit id: "schema-design"
     commit id: "type-generation"
-    commit id: "performance-issues"
+    commit id: "performance-issues" type: HIGHLIGHT
     branch experimental/grpc
     checkout experimental/grpc
     commit id: "protobuf-setup"
     commit id: "streaming-api"
-    commit id: "latency-regression"
+    commit id: "latency-regression" type: HIGHLIGHT
 ```
 
-This example shows:
+Example Git notes we want to surface:
 
-- Multiple competing approaches to telemetry (OpenTelemetry, Jaeger, Prometheus, Datadog) 
-- Kubernetes integration that grew too complex
-- API design experiments (GraphQL, gRPC) that had performance issues
-- Unit test improvements that were never completed
+```bash
+# On commit dd-pricing-concerns
+git notes add -m "Datadog costs would exceed $50k/month at our scale. Local Prometheus cheaper but needs dedicated team."
 
-frecklehugger helps discover Git notes across all these branches to understand architectural decisions and abandoned approaches.
+# On commit performance-issues  
+git notes add -m "GraphQL N+1 queries causing 150ms p95 latency. Consider DataLoader or switching to gRPC."
+
+# On commit latency-regression
+git notes add -m "gRPC streaming adds 45ms overhead per request. Stick with REST endpoints for now."
+```
+
+frecklehugger helps discover and organize these scattered insights that would otherwise be lost in abandoned branches.
+
+## Features
+
+- Find Git notes across all branches
+- Surface notes from abandoned feature branches
+- Search notes by content
+- Export notes in reusable formats
+- CLI interface for easy integration
+
+[Rest of README remains the same...]
+```
 
 ## Features
 
