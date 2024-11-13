@@ -38,13 +38,6 @@ jobs:
         with:
           args: --config=.golangci.yml
           skip-cache: true
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@d6238b002a20823d52840fda27e2d4891c5952dc # v4
-        with:
-          args: --config=.golangci.yml
-          version: latest
-          skip-pkg-cache: true
-          skip-build-cache: true
       - name: Run GoReleaser
         if: runner.os == 'Linux'
         uses: goreleaser/goreleaser-action@9ed2f89a662bf1735a48bc8557fd212fa902bebf # v6
