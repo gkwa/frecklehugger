@@ -33,11 +33,12 @@ jobs:
         run: |
           go build -v
           go test ./...
-      - name: Run staticcheck
-        uses: dominikh/staticcheck-action@fe1dd0c3658873b46f8c9bb3291096a617310ca6 # v1.3.1
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v4
         with:
           version: latest
-          install-go: false
+          skip-pkg-cache: true
+          skip-build-cache: true
       - name: Run GoReleaser
         if: runner.os == 'Linux'
         uses: goreleaser/goreleaser-action@9ed2f89a662bf1735a48bc8557fd212fa902bebf # v6

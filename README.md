@@ -4,7 +4,7 @@ Git archaeology tool for exploring abandoned ideas.
 
 ## Motivation
 
-This is an *experimental* tool for exploring how to gather knowledge from Git notes in abandoned feature branches.
+This is an _experimental_ tool for exploring how to gather knowledge from Git notes in abandoned feature branches.
 
 Many Git repositories contain deeply nested feature branches that never get merged. Sometimes these failed experiments contain valuable lessons in their Git notes - why certain approaches were abandoned, what limitations were discovered, etc.
 
@@ -30,7 +30,7 @@ gitGraph
     commit id: "jaeger-poc"
     commit id: "sampling-tuning"
     branch feature/telemetry-jaeger-kubernetes
-    checkout feature/telemetry-jaeger-kubernetes 
+    checkout feature/telemetry-jaeger-kubernetes
     commit id: "k8s-operator"
     commit id: "custom-crd-wip"
     checkout feature/telemetry
@@ -72,11 +72,13 @@ This is an experiment to see if collecting and organizing these notes provides a
 ## Quick Start
 
 Install:
+
 ```bash
 go install github.com/gkwa/frecklehugger@latest
 ```
 
 Read notes:
+
 ```bash
 frecklehugger notes .
 ```
@@ -85,9 +87,9 @@ frecklehugger notes .
 
 Create some test notes:
 
-```bash 
+```bash
 # Initialize repo
-git init 
+git init
 
 # Make a commit
 echo "hello" > file.txt
@@ -104,16 +106,19 @@ frecklehugger notes .
 ## Installation from Source
 
 Clone:
+
 ```bash
 git clone https://github.com/gkwa/frecklehugger.git
 ```
 
 Build:
-```bash 
+
+```bash
 go build
 ```
 
 Install:
+
 ```bash
 go install
 ```
@@ -130,26 +135,30 @@ frecklehugger version      # Print version info
 Default config location: `$HOME/.frecklehugger.yaml`
 
 Options:
+
 ```yaml
 log-format: text # json or text
 verbose: 2 # 0-3
 ```
 
 Override with flags:
+
 ```bash
 --log-format string   # json or text
--v, --verbose count   # Increase verbosity 
+-v, --verbose count   # Increase verbosity
 ```
 
 ## Development
 
 Run tests:
+
 ```bash
 go test ./...
 ```
 
 Run linter:
-```bash 
+
+```bash
 golangci-lint run
 ```
 
@@ -160,7 +169,6 @@ frecklehugger help    # Get help
 ```
 
 ## Status
-
 
 1. Do Git notes in abandoned branches contain useful knowledge?
 2. Can we surface this knowledge in a useful way?
