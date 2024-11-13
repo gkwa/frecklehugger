@@ -1,20 +1,16 @@
 # frecklehugger
 
-Git archaeology tool for excavating lost knowledge from abandoned feature branches.
+Git archaeology tool for exploring abandoned ideas.
 
 ## Motivation
 
-When exploring new technical approaches, we often create experimental branches that never get merged. Despite being "dead ends", these branches frequently contain valuable insights in their Git notes:
+This is an *experimental* tool for exploring how to gather knowledge from Git notes in abandoned feature branches.
 
-- Failed approaches that seemed promising ("tried Jaeger but hit sampling limitations")
-- Performance benchmarks ("GraphQL queries taking 2.5x longer than REST")
-- Architectural decision records ("K8s operator too complex for our team size")
-- Cost analyses ("Datadog pricing doesn't scale for our use case") 
-- Dependencies that didn't pan out ("gRPC streaming increases latency by 30%")
+Many Git repositories contain deeply nested feature branches that never get merged. Sometimes these failed experiments contain valuable lessons in their Git notes - why certain approaches were abandoned, what limitations were discovered, etc.
 
-This knowledge gets buried in Git notes across many abandoned feature branches. frecklehugger helps rediscover and organize these insights.
+frecklehugger is an exploration of whether we can surface and reorganize these buried insights.
 
-### Example Repository Structure
+### An Example Repository with Dead Ends
 
 ```mermaid
 gitGraph
@@ -62,35 +58,16 @@ gitGraph
     commit id: "latency-regression" type: HIGHLIGHT
 ```
 
-Example Git notes we want to surface:
+Example Git notes we'd want to surface:
 
 ```bash
-# On commit dd-pricing-concerns
-git notes add -m "Datadog costs would exceed $50k/month at our scale. Local Prometheus cheaper but needs dedicated team."
-
-# On commit performance-issues  
-git notes add -m "GraphQL N+1 queries causing 150ms p95 latency. Consider DataLoader or switching to gRPC."
-
-# On commit latency-regression
-git notes add -m "gRPC streaming adds 45ms overhead per request. Stick with REST endpoints for now."
+# Technical learnings in abandoned branches
+git notes add -m "K8s operator adds too much complexity for our small team"
+git notes add -m "GraphQL N+1 problems - would need significant caching"
+git notes add -m "Streaming adds 45ms overhead. Batch REST endpoints better for our use case"
 ```
 
-frecklehugger helps discover and organize these scattered insights that would otherwise be lost in abandoned branches.
-
-## Features
-
-- Find Git notes across all branches
-- Surface notes from abandoned feature branches
-- Search notes by content
-- Export notes in reusable formats
-- CLI interface for easy integration
-
-[Rest of README remains the same...]
-```
-
-## Features
-
-Parse and read git notes from branches
+This is an experiment to see if collecting and organizing these notes provides any value.
 
 ## Quick Start
 
@@ -104,9 +81,9 @@ Read notes:
 frecklehugger notes .
 ```
 
-## Example
+## Example Usage
 
-Create git notes and view them:
+Create some test notes:
 
 ```bash 
 # Initialize repo
@@ -118,7 +95,7 @@ git add file.txt
 git commit -m "first commit"
 
 # Add notes
-git notes add -m "note content"
+git notes add -m "Tried X but Y was a problem"
 
 # View notes
 frecklehugger notes .
@@ -181,3 +158,10 @@ golangci-lint run
 ```bash
 frecklehugger help    # Get help
 ```
+
+## Status
+
+
+1. Do Git notes in abandoned branches contain useful knowledge?
+2. Can we surface this knowledge in a useful way?
+3. Is there value in collecting and organizing these "failed experiment" notes?
