@@ -34,7 +34,7 @@ jobs:
           go build -v
           go test ./...
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@818ec4d51a1feacefc42ff1b3ec25d4962690f39 # v6
+        uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9
         with:
           args: --config=.golangci.yml --issues-exit-code=0
           skip-cache: true
